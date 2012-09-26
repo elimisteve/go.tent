@@ -39,6 +39,8 @@ func (c *Client) Discover(url string) error {
 }
 
 func (c *Client) Following() *FollowList {
-	c.FollowList = &FollowList{}
+	if c.FollowList == nil {
+		c.FollowList = &FollowList{}
+	}
 	return c.FollowList
 }
