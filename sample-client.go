@@ -4,7 +4,7 @@
 package main
 
 import (
-	tent "github.com/elimisteve/go.tent"
+	"github.com/elimisteve/go.tent/tent"
 	"github.com/elimisteve/fun"
 )
 
