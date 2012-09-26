@@ -4,17 +4,17 @@
 package main
 
 import (
-	"github.com/elimisteve/go.tent/tent"
 	"github.com/elimisteve/fun"
+	"github.com/elimisteve/go.tent/tent"
 )
 
 func main() {
 	// See https://github.com/tent/tent-client-ruby
 
 	mac := tent.Mac{
-        KeyId:     "be94a6bf",
-        Key:       "974af035",
-        Algorithm: "hmac-sha-256",
+		KeyId:     "be94a6bf",
+		Key:       "974af035",
+		Algorithm: "hmac-sha-256",
 	}
 
 	// Server communication
