@@ -3,13 +3,6 @@
 
 package tent
 
-type Mac struct {
-	KeyId     string
-	Key       string
-	Algorithm string
-}
-
-
 type FollowList []string
 
 func (fl *FollowList) Create(url string) error {
@@ -18,7 +11,6 @@ func (fl *FollowList) Create(url string) error {
 	return nil
 }
 
-
 type Client struct {
 	URL        string
 	Mac        *Mac
@@ -26,7 +18,7 @@ type Client struct {
 }
 
 func NewClient(url string, mac *Mac) *Client {
-	client := Client {
+	client := Client{
 		URL: url,
 		Mac: mac,
 	}
