@@ -4,13 +4,13 @@
 package tent
 
 type Following struct {
-	RemoteId    string      `json:"remoteid"`
-	Entity      Entity      `json:"entity"`
-	Permissions Permissions `json:"permissions"`
-	Id          Id          `json:"id"`
-	CreatedAt   int64       `json:"created_at"`
-	UpdatedAt   int64       `json:"updated_at"`
-	Groups      []Group     `json:"groups"`
-	Profile     Profile     `json:"profile"`
-	Licences    []URL       `json:"licences"`
+	RemoteId    string      `json:"remoteid,omitempty"`
+	Entity      Entity      `json:"entity,omitempty"`
+	Permissions Permissions `json:"permissions,omitempty"`
+	Id          Id          `json:"id,omitempty"`
+	CreatedAt   int64       `json:"createdat,omitempty"`
+	UpdatedAt   int64       `json:"updatedat,omitempty"`
+	Groups      []Group     `json:"groups,omitempty"`
+	Profile     Profile     `json:"profile,omitempty"`
+	Licences    []URL       `json:"licences,omitempty"`
 }
