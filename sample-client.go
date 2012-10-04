@@ -8,7 +8,6 @@ import (
 	"github.com/elimisteve/fun"
 	"github.com/elimisteve/go.tent/tent"
 	"log"
-	"os"
 )
 
 const (
@@ -25,15 +24,24 @@ func main() {
 	// TODO: Get rid of ENV. Don't copy the Ruby design; thread safety
 	// is good.
 	tent.ENV = tent.NewEnv(TENT_SERVER, "443", "/tent/posts", "post")
-
-	if len(os.Args) < 2 {
-		log.Fatalf("Say something!\n")
-	}
-
+	//
 	// Post new status update to TENT_SERVER
-	responseBody, err := tent.PostStatus(CURRENT_AUTH_DETAILS, os.Args[1])
+	//
+	status := "This message posted with go.tent's sample client "
+	status += "https://github.com/elimisteve/go.tent"
+	responseBody, err := tent.PostStatus(CURRENT_AUTH_DETAILS, status)
 	fun.MaybeFatalAt("tent.PostStatus", err)
-	fmt.Printf("%s\n", responseBody)
+	fmt.Printf("Post from %s: \n%s\n", TENT_SERVER, responseBody)
+
+
+	tent.ENV = tent.NewEnv(TENT_SERVER, "443", "/tent/followings", "get")
+	//
+	// Get followers of TENT_SERVER
+	//
+	responseBody, err = tent.GetStatuses(CURRENT_AUTH_DETAILS)
+	fun.MaybeFatalAt("tent.GetStatuses", err)
+	fmt.Printf("\n\nWho %s is following: \n%s\n", TENT_SERVER, responseBody)
+
 
 	//
 	// TODO
