@@ -32,4 +32,6 @@ The resulting values should look something like this:
 
 ## Usage
 
-    go run simple-client.go "Hello to Tent.is from go.tent"
+    go run simple-client.go
+
+See the calls to `tent.Get()` and `tent.Post()` in `simple-client.go`.
