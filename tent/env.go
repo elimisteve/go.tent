@@ -3,11 +3,11 @@
 
 package tent
 
-type URL struct {
+type RubyURL struct {
 	Host, Port, Path string
 }
 
-func (url *URL) String() string {
+func (url *RubyURL) String() string {
 	proto := "https://"
 	if url.Port == "80" {
 		proto = "http://"
@@ -17,13 +17,13 @@ func (url *URL) String() string {
 
 type Environment struct {
 	Method  string
-	URL     *URL
+	URL     *RubyURL
 	Body    string
 	Headers map[string]string
 }
 
 func NewEnv(host, port, path, method string) *Environment {
-	url := URL{
+	url := RubyURL{
 		Host: host,
 		Port: port,
 		Path: path,
