@@ -12,5 +12,5 @@ type Following struct {
 	UpdatedAt   int64       `json:"updatedat,omitempty"`
 	Groups      []Group     `json:"groups,omitempty"`
 	Profile     Profile     `json:"profile,omitempty"`
-	Licences    []URL       `json:"licences,omitempty"`
+	Licenses    []URL       `json:"licenses,omitempty"`
 }
