@@ -4,6 +4,6 @@
 package tent
 
 type Mention struct {
-	Entity Entity `json:"entity"`
+	Entity Entity `json:"entity,omitempty"`
 	Post   Id     `json:"post,omitempty"`
 }
