@@ -3,11 +3,18 @@
 
 package tent
 
+import "encoding/json"
+
 type BasicInfo struct {
-	Name      string `json:"name"`
-	AvatarURL URL    `json:"avatar_url"`
-	Birthdate string `json:"birthdate"`
-	Location  string `json:"location"`
-	Gender    string `json:"gender"`
-	Bio       string `json:"bio"`
+	Name      string `json:"name,omitempty"`
+	AvatarURL URL    `json:"avatar_url,omitempty"`
+	Birthdate string `json:"birthdate,omitempty"`
+	Location  string `json:"location,omitempty"`
+	Gender    string `json:"gender,omitempty"`
+	Bio       string `json:"bio,omitempty"`
 }
+
+// func (info *BasicInfo) Marshal() ([]byte, error) {
+// 	jsonStr, err := json.Marshal(info)
+// 	return jsonStr, err
+// }

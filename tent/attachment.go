@@ -3,6 +3,7 @@
 
 package tent
 
+// TODO: Make sure this is right; docs are ambiguous
 type Attachment struct {
 	Id          Id     `json:"id"`
 	ContentType string `json:"type"`
