@@ -3,7 +3,7 @@
 
 package tent
 
-import "encoding/json"
+// import "encoding/json"
 
 type BasicInfo struct {
 	Name      string `json:"name,omitempty"`
