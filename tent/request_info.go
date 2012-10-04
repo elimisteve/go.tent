@@ -3,36 +3,46 @@
 
 package tent
 
-type RubyURL struct {
-	Host, Port, Path string
+import (
+	"strings"
+)
+
+type RequestInfo struct {
+	Proto       string
+	Host        string
+	Port        string
+	Path        string
+	AuthDetails string
 }
 
-func (url *RubyURL) String() string {
-	proto := "https://"
-	if url.Port == "80" {
-		proto = "http://"
+func NewRequestInfo(host, path, auth string) *RequestInfo {
+	req := RequestInfo{
+		Proto:       "https",
+		Host:        host,
+		Port:        "443",
+		Path:        path,
+		AuthDetails: auth,
 	}
-	return proto + url.Host + url.Path
+	// If protocol included in Host string, strip it off
+	if strings.HasPrefix(req.Host, "http://") {
+		// Eveverything after the "http://"
+		req.Host = req.Host[len("http://"):]
+		req.Proto = "http"
+	}
+	if strings.HasPrefix(req.Host, "https://") {
+		// Eveverything after the "https://"
+		req.Host = req.Host[len("https://"):]
+		req.Proto = "https"
+	}
+	return &req
 }
 
-type Environment struct {
-	Method  string
-	URL     *RubyURL
-	Body    string
-	Headers map[string]string
-}
-
-func NewEnv(host, port, path, method string) *Environment {
-	url := RubyURL{
-		Host: host,
-		Port: port,
-		Path: path,
+func (req *RequestInfo) FullURL() string {
+	maybeSlash := ""
+	// If no '/' between domain and path, add one
+	if !strings.HasSuffix(req.Host, "/") && !strings.HasPrefix(req.Path, "/") {
+		maybeSlash = "/"
 	}
-	env := Environment{
-		Method:  method,
-		URL:     &url,
-		Body:    "",
-		Headers: make(map[string]string),
-	}
-	return &env
+	return strings.ToLower(req.Proto) + "://" + req.Host + ":" + req.Port +
+		maybeSlash + req.Path
 }

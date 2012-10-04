@@ -24,10 +24,10 @@ type Mac struct {
 	Algorithm string `json:"mac_algorithm"`
 }
 
-func signRequest(mac *Mac) (authHeader string) {
+func signRequest(method string, info *RequestInfo, mac *Mac) (authHeader string) {
 	now := strconv.Itoa(int(time.Now().Unix()))
 	nonce := fun.RandStrOfLen(NONCE_LENGTH, HEX_CHARSET)
-	reqStr := buildRequestString(now, nonce)
+	reqStr := buildRequestString(info, method, now, nonce)
 	signed, err := macSigner(mac.Algorithm, mac.Key, reqStr)
 	fun.MaybeFatalAt("macSigner", err)
 	// TODO: Make sure there should only be 1 replacement
@@ -36,9 +36,9 @@ func signRequest(mac *Mac) (authHeader string) {
 	return
 }
 
-func buildRequestString(now, nonce string) string {
-	multiline := []string{now, nonce, strings.ToUpper(ENV.Method),
-		ENV.URL.Path, ENV.URL.Host, ENV.URL.Port, "", ""}
+func buildRequestString(info *RequestInfo, method, now, nonce string) string {
+	multiline := []string{now, nonce, strings.ToUpper(method),
+		info.Path, info.Host, info.Port, "", ""}
 	return strings.Join(multiline, "\n")
 }
 
@@ -73,6 +73,3 @@ func base64Encode(s string) (encoded string) {
 	encoded = string(enc)
 	return
 }
-
-// TODO: Get rid of this. Thread safety is good.
-var ENV = NewEnv("", "", "", "")
