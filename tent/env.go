@@ -29,9 +29,9 @@ func NewEnv(host, port, path, method string) *Environment {
 		Path: path,
 	}
 	env := Environment{
-		Method: method,
-		URL: &url,
-		Body: "",
+		Method:  method,
+		URL:     &url,
+		Body:    "",
 		Headers: make(map[string]string),
 	}
 	return &env

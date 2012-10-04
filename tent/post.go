@@ -27,10 +27,12 @@ func PostStatus(currentAuthDetails, message string) ([]byte, error) {
 
 	authStr, err := genAuthStr(currentAuthDetails)
 	fun.MaybeFatalAt("genAuthStr", err)
-	
+
 	addHeaders(req, authStr)
 
-	if DEBUG { viewRequestBody(req) }
+	if DEBUG {
+		viewRequestBody(req)
+	}
 
 	// Perform request
 	client := &http.Client{}

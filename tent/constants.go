@@ -7,20 +7,20 @@ type ProfileInfo string
 
 // Info types
 const (
-	TYPE_CORE ProfileInfo  = "https://tent.io/types/info/core/v0.1.0"
+	TYPE_CORE  ProfileInfo = "https://tent.io/types/info/core/v0.1.0"
 	TYPE_BASIC ProfileInfo = "https://tent.io/types/info/basic/v0.1.0"
 )
 
 // Post types
 const (
-	TYPE_ALBUM ProfileInfo    = "https://tent.io/types/post/album/v0.1.0"
-	TYPE_DELETE ProfileInfo   = "https://tent.io/types/post/delete/v0.1.0"
-	TYPE_ESSAY ProfileInfo    = "https://tent.io/types/post/essay/v0.1.0"
+	TYPE_ALBUM    ProfileInfo = "https://tent.io/types/post/album/v0.1.0"
+	TYPE_DELETE   ProfileInfo = "https://tent.io/types/post/delete/v0.1.0"
+	TYPE_ESSAY    ProfileInfo = "https://tent.io/types/post/essay/v0.1.0"
 	TYPE_MENTIONS ProfileInfo = "https://tent.io/types/post/mentions/v0.1.0"
-	TYPE_PHOTO ProfileInfo    = "https://tent.io/types/post/photo/v0.1.0"
-	TYPE_PROFILE ProfileInfo  = "https://tent.io/types/post/profile/v0.1.0"
-	TYPE_REPOST ProfileInfo   = "https://tent.io/types/post/repost/v0.1.0"
-	TYPE_STATUS ProfileInfo   = "https://tent.io/types/post/status/v0.1.0"
+	TYPE_PHOTO    ProfileInfo = "https://tent.io/types/post/photo/v0.1.0"
+	TYPE_PROFILE  ProfileInfo = "https://tent.io/types/post/profile/v0.1.0"
+	TYPE_REPOST   ProfileInfo = "https://tent.io/types/post/repost/v0.1.0"
+	TYPE_STATUS   ProfileInfo = "https://tent.io/types/post/status/v0.1.0"
 )
 
 // Miscellaneous

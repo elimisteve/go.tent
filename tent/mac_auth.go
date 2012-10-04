@@ -4,10 +4,10 @@
 package tent
 
 import (
-	"encoding/base64"
 	"crypto/hmac"
 	"crypto/sha1"
 	"crypto/sha256"
+	"encoding/base64"
 	"fmt"
 	"github.com/elimisteve/fun"
 	"hash"

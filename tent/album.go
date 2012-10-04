@@ -6,6 +6,6 @@ package tent
 type Album struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
-	Photos      []Id   `json:"photos"`      // Required
+	Photos      []Id   `json:"photos"` // Required
 	Cover       Id     `json:"cover"`
 }
