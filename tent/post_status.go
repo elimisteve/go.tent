@@ -8,10 +8,6 @@ import (
 	"time"
 )
 
-const (
-	DEBUG = false
-)
-
 func PostStatus(info *RequestInfo, message string) ([]byte, error) {
 	// TODO: JSON-escape `message` or use then JSONify a ~Status struct
 	body := fmt.Sprintf(STATUS_BODY, time.Now().Unix(), message)
