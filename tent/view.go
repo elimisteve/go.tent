@@ -3,4 +3,5 @@
 
 package tent
 
+// TODO: The spec doesn't say, but figure out what should go here
 type View struct{}
