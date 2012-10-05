@@ -3,6 +3,7 @@
 
 package tent
 
+// TODO: Probably rename `ProfileInfo` back to `TypeString`
 type ProfileInfo string
 
 // Info types
