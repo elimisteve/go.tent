@@ -24,7 +24,8 @@ type Mac struct {
 	Algorithm string `json:"mac_algorithm"`
 }
 
-func signRequest(method string, info *RequestInfo, mac *Mac) (authHeader string) {
+func signRequest(method string, info *RequestInfo) (authHeader string) {
+    mac := info.Mac
 	now := strconv.Itoa(int(time.Now().Unix()))
 	nonce := fun.RandStrOfLen(NONCE_LENGTH, HEX_CHARSET)
 	reqStr := buildRequestString(info, method, now, nonce)

@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func Get(info *RequestInfo) ([]byte, error) {
+func get(info *RequestInfo) ([]byte, error) {
 	// Build request
 	req, err := http.NewRequest("GET", info.FullURL(), nil)
 	if err != nil {
