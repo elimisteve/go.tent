@@ -5,13 +5,10 @@ package tent
 
 type Profile map[string]map[string]interface{}
 
-
-
 // // The idea here is to have BasicInfo and CoreInfo implement the
 // // `Marshal() ([]byte, error)` method, but it doesn't work:
 
 // type Profile map[ProfileInfo]json.Marshaler
-
 
 //
 // Unmarshal'd response
@@ -35,7 +32,6 @@ type Profile map[string]map[string]interface{}
 // 		"entity":"https://rootwyrm.tent.is"
 // 	}
 // }
-
 
 //
 // JSON version (actual response)

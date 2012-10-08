@@ -4,9 +4,9 @@
 package tent
 
 import (
-    "fmt"
-    "time"
-    "encoding/json"
+	"encoding/json"
+	"fmt"
+	"time"
 )
 
 type Client struct {
@@ -17,12 +17,12 @@ type Client struct {
 
 // Temporary constructor for AuthDetail string
 func NewClientWithAuthStr(uri, authStr string) (*Client, error) {
-    mac := Mac{}
-    err := json.Unmarshal([]byte(authStr), &mac)
-    if err != nil {
-        return nil, err
-    }
-    return NewClient(uri, &mac), nil
+	mac := Mac{}
+	err := json.Unmarshal([]byte(authStr), &mac)
+	if err != nil {
+		return nil, err
+	}
+	return NewClient(uri, &mac), nil
 }
 
 func NewClient(uri string, mac *Mac) *Client {
@@ -46,24 +46,24 @@ func (c *Client) Following() *FollowList {
 }
 
 func (c *Client) PostStatus(message string) (rspPost StatusPost, err error) {
-    info :=  newRequestInfo(c.URI, "/tent/posts", c.Mac)
-    body := fmt.Sprintf(STATUS_BODY, time.Now().Unix(), message)
-    var responseBody []byte;
-    responseBody, err = post(info, body)
-    if err != nil {
-        return
-    }
-    err = json.Unmarshal(responseBody, &rspPost)
-    return
+	info := newRequestInfo(c.URI, "/tent/posts", c.Mac)
+	body := fmt.Sprintf(STATUS_BODY, time.Now().Unix(), message)
+	var responseBody []byte
+	responseBody, err = post(info, body)
+	if err != nil {
+		return
+	}
+	err = json.Unmarshal(responseBody, &rspPost)
+	return
 }
 
 func (c *Client) GetFollowings() (followings []Following, err error) {
-    req := newRequestInfo(c.URI, "/tent/followings", c.Mac)
-    var responseBody []byte;
-    responseBody, err = get(req)
-    if err != nil {
-        return
-    }
-    err = json.Unmarshal(responseBody, &followings)
-    return
+	req := newRequestInfo(c.URI, "/tent/followings", c.Mac)
+	var responseBody []byte
+	responseBody, err = get(req)
+	if err != nil {
+		return
+	}
+	err = json.Unmarshal(responseBody, &followings)
+	return
 }

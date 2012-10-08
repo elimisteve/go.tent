@@ -8,20 +8,20 @@ import (
 )
 
 type RequestInfo struct {
-	Proto       string
-	Host        string
-	Port        string
-	Path        string
-	Mac         *Mac
+	Proto string
+	Host  string
+	Port  string
+	Path  string
+	Mac   *Mac
 }
 
 func newRequestInfo(host, path string, mac *Mac) *RequestInfo {
 	req := RequestInfo{
-		Proto:       "https",
-		Host:        host,
-		Port:        "443",
-		Path:        path,
-		Mac:         mac,
+		Proto: "https",
+		Host:  host,
+		Port:  "443",
+		Path:  path,
+		Mac:   mac,
 	}
 	// If protocol included in Host string, strip it off
 	if strings.HasPrefix(req.Host, "http://") {
