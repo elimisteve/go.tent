@@ -4,7 +4,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/elimisteve/fun"
 	"github.com/elimisteve/go.tent/tent"
@@ -22,48 +21,33 @@ func main() {
 		log.Fatalf("Set USERNAME and CURRENT_AUTH_DETAILS in this file")
 	}
 
+	// Construct a client
+	client, err := tent.NewClientWithAuthStr(TENT_SERVER, CURRENT_AUTH_DETAILS)
+
 	//
 	// Post new status update to TENT_SERVER
 	//
-	req := tent.NewRequestInfo(TENT_SERVER, "/tent/posts",
-		CURRENT_AUTH_DETAILS)
+	fun.MaybeFatalAt("tent.PostStatus", err)
 	status := "This message posted with go.tent's sample client "
 	status += "https://github.com/elimisteve/go.tent"
-	responseBody, err := tent.PostStatus(req, status)
+	responsePost, err := client.PostStatus(status)
 	fun.MaybeFatalAt("tent.PostStatus", err)
-	fmt.Printf("Post from %s: \n%s\n\n", TENT_SERVER, responseBody)
-
-	// Unmarshal responseBody into a StatusPost
-	post := tent.StatusPost{}
-	err = json.Unmarshal(responseBody, &post)
-	fun.MaybeFatalAt("json.Unmarshal", err)
-	fmt.Printf("Unmarshal'd response: \n%+v\n", post)
+	fmt.Printf("Post from %s: \n%+v\n\n", TENT_SERVER, responsePost)
 
 	//
-	// Get users followed by TENT_SERVER
+	// Get entities that the user follows
 	//
-	req = tent.NewRequestInfo(TENT_SERVER, "/tent/followings",
-		CURRENT_AUTH_DETAILS)
-	responseBody, err = tent.Get(req)
-	fun.MaybeFatalAt("tent.GetStatuses", err)
-	// fmt.Printf("%s\n\n\n", responseBody)
-
-	followings := []tent.Following{}
-	err = json.Unmarshal(responseBody, &followings)
-	fun.MaybeFatalAt("json.Unmarshal", err)
-
-	fmt.Printf("\n\n3 users %s is following:\n\n", TENT_SERVER)
+	followings, err := client.GetFollowings()
+	fun.MaybeFatalAt("client.GetFollowings", err)
+	fmt.Printf("\n\n%d users %s is following:\n\n", len(followings), TENT_SERVER)
 	// Loop over tent.Following vars
-	for _, f := range followings[:3] {
+	for _, f := range followings[:] {
 		fmt.Printf("%#v\n\n", f)
 	}
-
 
 	//
 	// TODO
 	//
-
-	// app := tent.NewApp(client)
 
 	// // Tent profile discovery
 	// err := client.Discover("http://tent-user.example.org")

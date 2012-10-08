@@ -4,7 +4,6 @@
 package tent
 
 import (
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -13,10 +12,7 @@ import (
 
 func genericRequest(req *http.Request, info *RequestInfo) ([]byte, error) {
 	// Generate auth string used to sign request
-	authStr, err := genAuthStr(req.Method, info)
-	if err != nil {
-		return nil, err
-	}
+	authStr := signRequest(req.Method, info)
 
 	addHeaders(req, authStr)
 
@@ -52,14 +48,4 @@ func viewRequestBodyFatal(req *http.Request) {
 	}
 	fmt.Printf("Request body == '%s'\n\n", reqStr)
 	log.Fatalf("`client.Do` won't work anyway; stopping early\n")
-}
-
-func genAuthStr(method string, info *RequestInfo) (string, error) {
-	mac := Mac{}
-	err := json.Unmarshal([]byte(info.AuthDetails), &mac)
-	if err != nil {
-		return "", err
-	}
-	authStr := signRequest(method, info, &mac)
-	return authStr, nil
 }
