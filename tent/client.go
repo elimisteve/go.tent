@@ -47,6 +47,7 @@ func (c *Client) Following() *FollowList {
 
 func (c *Client) PostStatus(message string) (rspPost StatusPost, err error) {
 	info := newRequestInfo(c.URI, "/tent/posts", c.Mac)
+	// TODO: JSON-escape `message` or use then JSONify a ~Status struct
 	body := fmt.Sprintf(STATUS_BODY, time.Now().Unix(), message)
 	responseBody := []byte{}
 	responseBody, err = Post(info, body)
