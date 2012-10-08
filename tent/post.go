@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func post(info *RequestInfo, data string) ([]byte, error) {
+func Post(info *RequestInfo, data string) ([]byte, error) {
 	req, err := http.NewRequest("POST", info.FullURL(), strings.NewReader(data))
 	if err != nil {
 		return nil, fmt.Errorf("Error creating new request from Post: %v", err)
