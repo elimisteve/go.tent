@@ -49,7 +49,7 @@ func (c *Client) PostStatus(message string) (rspPost StatusPost, err error) {
 	info := newRequestInfo(c.URI, "/tent/posts", c.Mac)
 	body := fmt.Sprintf(STATUS_BODY, time.Now().Unix(), message)
 	var responseBody []byte
-	responseBody, err = post(info, body)
+	responseBody, err = Post(info, body)
 	if err != nil {
 		return
 	}
@@ -60,7 +60,7 @@ func (c *Client) PostStatus(message string) (rspPost StatusPost, err error) {
 func (c *Client) GetFollowings() (followings []Following, err error) {
 	req := newRequestInfo(c.URI, "/tent/followings", c.Mac)
 	var responseBody []byte
-	responseBody, err = get(req)
+	responseBody, err = Get(req)
 	if err != nil {
 		return
 	}
