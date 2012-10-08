@@ -10,29 +10,3 @@ func (fl *FollowList) Create(url string) error {
 	// TODO: Do remote call to grab info(???) from URL
 	return nil
 }
-
-type Client struct {
-	URL        string
-	Mac        *Mac
-	FollowList *FollowList
-}
-
-func NewClient(url string, mac *Mac) *Client {
-	client := Client{
-		URL: url,
-		Mac: mac,
-	}
-	return &client
-}
-
-func (c *Client) Discover(url string) error {
-	// TODO: Fill in stub
-	return nil
-}
-
-func (c *Client) Following() *FollowList {
-	if c.FollowList == nil {
-		c.FollowList = &FollowList{}
-	}
-	return c.FollowList
-}
