@@ -34,6 +34,50 @@ The resulting values should look something like this:
 
     go run simple-client.go
 
-See the calls to `client.GetFollowings()` and `client.PostStatus()`,
-following `client, err := tent.NewClientWithAuthStr(...)`, in
-`sample-client.go`.
+See the calls to `client.GetFollowings()`, `client.GetStatuses()`, and
+`client.PostStatus()`, following `client, err :=
+tent.NewClientWithAuthStr(...)`, in `sample-client.go`.  ...actually, I'll just make it easy:
+
+```
+	const (
+		USERNAME             = "your_username_here"
+		TENT_SERVER          = USERNAME + ".tent.is"
+		CURRENT_AUTH_DETAILS = `{"mac_key_id":"u:...,"mac_key":"...,"mac_algorithm":"hmac-sha-256"}`
+	)
+
+	...
+
+	// Construct a client
+	client, err := tent.NewClientWithAuthStr(TENT_SERVER, CURRENT_AUTH_DETAILS)
+	...
+
+
+	//
+	// Get user's recent statuses
+	//
+	posts, err := client.GetStatuses()
+	...
+	for _, post := range posts {
+		fmt.Printf("%s: %s\n", post.Entity, post.Content.Text)
+	}
+
+
+	//
+	// Get entities that the user follows
+	//
+	followings, err := client.GetFollowings()
+	...
+	for _, f := range followings {
+		fmt.Printf("%s\n", f.Entity)
+	}
+
+
+	//
+	// Post new status update to TENT_SERVER
+	//
+	statusPost, err := client.PostStatus("Hello, Tent!")
+	...
+	fmt.Printf("You just posted to Tent.is! See it at https://%s/posts/%s\n",
+		TENT_SERVER, statusPost.Id)
+}
+```
