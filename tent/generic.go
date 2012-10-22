@@ -16,6 +16,8 @@ func genericRequest(req *http.Request, info *RequestInfo) ([]byte, error) {
 
 	addHeaders(req, authStr)
 
+	// fmt.Printf("\ngenericRequest: req == %+v\n\n", req)
+
 	// Perform request
 	client := &http.Client{}
 	resp, err := client.Do(req)
