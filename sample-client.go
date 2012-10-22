@@ -23,16 +23,17 @@ func main() {
 
 	// Construct a client
 	client, err := tent.NewClientWithAuthStr(TENT_SERVER, CURRENT_AUTH_DETAILS)
+	fun.MaybeFatalAt("tent.NewClientWithAuthStr", err)
 
 	//
 	// Post new status update to TENT_SERVER
 	//
+	msg := "This message posted with go.tent's sample client "
+	msg += "https://github.com/elimisteve/go.tent"
+	statusPost, err := client.PostStatus(msg)
 	fun.MaybeFatalAt("tent.PostStatus", err)
-	status := "This message posted with go.tent's sample client "
-	status += "https://github.com/elimisteve/go.tent"
-	responsePost, err := client.PostStatus(status)
-	fun.MaybeFatalAt("tent.PostStatus", err)
-	fmt.Printf("Post from %s: \n%+v\n\n", TENT_SERVER, responsePost)
+	fmt.Printf("You just posted to Tent.is! See it at https://%s/posts/%s",
+		TENT_SERVER, statusPost.Id)
 
 	//
 	// Get entities that the user follows
@@ -40,19 +41,13 @@ func main() {
 	followings, err := client.GetFollowings()
 	fun.MaybeFatalAt("client.GetFollowings", err)
 	fmt.Printf("\n\n%d users %s is following:\n\n", len(followings), TENT_SERVER)
+
 	// Loop over tent.Following vars
-	for _, f := range followings[:] {
-		fmt.Printf("%#v\n\n", f)
+	for ndx, f := range followings {
+		if ndx != 0 {
+			fmt.Printf(", ")
+		}
+		fmt.Printf("%s", f.Entity)
 	}
-
-	//
-	// TODO
-	//
-
-	// // Tent profile discovery
-	// err := client.Discover("http://tent-user.example.org")
-	// fun.MaybeFatalAt("client.Discover", err)
-
-	// err = client.Following().Create("http://another-tent.example.com")
-	// fun.MaybeFatalAt("client.Following().Create", err)
+	fmt.Printf("\n")
 }
