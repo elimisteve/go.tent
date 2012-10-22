@@ -12,8 +12,8 @@ func Get(info *RequestInfo) ([]byte, error) {
 	// Build request
 	req, err := http.NewRequest("GET", info.FullURL(), nil)
 	if err != nil {
-		return nil, fmt.Errorf("Error calling http.NewRequest from Get: %v",
-			err)
+		str := "Error calling http.NewRequest from Get: %v"
+		return nil, fmt.Errorf(str, err)
 	}
 
 	// Perform request
