@@ -34,4 +34,6 @@ The resulting values should look something like this:
 
     go run simple-client.go
 
-See the calls to `tent.Get()` and `tent.Post()` in `simple-client.go`.
+See the calls to `client.GetFollowings()` and `client.PostStatus()`,
+following `client, err := tent.NewClientWithAuthStr(...)`, in
+`sample-client.go`.
