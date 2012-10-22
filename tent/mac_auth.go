@@ -29,11 +29,13 @@ func signRequest(method string, info *RequestInfo) (authHeader string) {
 	now := strconv.Itoa(int(time.Now().Unix()))
 	nonce := fun.RandStrOfLen(NONCE_LENGTH, HEX_CHARSET)
 	reqStr := buildRequestString(info, method, now, nonce)
+	// fmt.Printf("signRequest: reqStr == %s\n", reqStr)
 	signed, err := macSigner(mac.Algorithm, mac.Key, reqStr)
 	fun.MaybeFatalAt("macSigner", err)
 	// TODO: Make sure there should only be 1 replacement
 	signature := strings.Replace(base64Encode(signed), "\n", "", 1)
 	authHeader = buildAuthHeader(mac, now, nonce, signature)
+	// fmt.Printf("signRequest: authHeader == %s\n", authHeader)
 	return
 }
 
