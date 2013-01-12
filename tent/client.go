@@ -58,6 +58,23 @@ func (c *Client) PostStatus(message string) (status StatusPost, err error) {
 	return
 }
 
+func (c *Client) PostPrivateStatus(message string, recipients ...Entity) (*StatusPost, error) {
+	info := newRequestInfo(c.URI, "/tent/posts", c.Mac)
+	body, err := NewSimpleStatusPost(info, message, recipients...)
+	responseBody := []byte{}
+	responseBody, err = Post(info, body)
+	if err != nil {
+		return nil, fmt.Errorf("Error posting private status: %v", err)
+	}
+	// Unmarshal
+	status := StatusPost{}
+	err = json.Unmarshal(responseBody, &status)
+	if err != nil {
+		return &status, nil
+	}
+	return nil, fmt.Errorf("Error unmarshaling server response: %v", err)
+}
+
 func (c *Client) GetStatuses() ([]StatusPost, error) {
 	info := newRequestInfo(c.URI, "/tent/posts", c.Mac)
 	// fmt.Printf("mac == %+v\n", *c.Mac)

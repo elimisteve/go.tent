@@ -24,6 +24,16 @@ const (
 	TYPE_STATUS   ProfileInfo = "https://tent.io/types/post/status/v0.1.0"
 )
 
+// Licenses
+const (
+	LICENSE_CREATIVE_COMMONS URL = "http://creativecommons.org/licenses/by/3.0/"
+	LICENSE_GPL_2            URL = "http://www.gnu.org/licenses/gpl-2.0.html"
+	LICENSE_GPL_3            URL = "http://www.gnu.org/licenses/gpl-3.0.html"
+	LICENSE_GPL_NEWEST       URL = "http://www.gnu.org/licenses/gpl.html"
+	LICENSE_AGPL_3           URL = "http://www.gnu.org/licenses/agpl-3.0.html"
+	LICENSE_AGPL_NEWEST      URL = "http://www.gnu.org/licenses/agpl.html"
+)
+
 // Miscellaneous
 const (
 	MEDIA_TYPE  = "application/vnd.tent.v0+json"
