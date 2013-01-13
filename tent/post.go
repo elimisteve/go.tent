@@ -25,17 +25,3 @@ func Post(info *RequestInfo, body string) ([]byte, error) {
 
 	return jsonResp, nil
 }
-
-// NewSimpleStatus generates a new StatusPost using the given message
-// intended for the given recipients
-func NewSimpleStatus(message string, recipients ...Entity) (status StatusPost, err error) {
-	licenses := []URL{LICENSE_CREATIVE_COMMONS}
-	permissions := Permissions{Entities: recipients}
-
-    status = StatusPost {
-	Type: TYPE_STATUS,
-	PublishedAt: time.Now().Unix(),
-	Permissions: permissions,
-	Licenses: licenses,
-	}
-}
