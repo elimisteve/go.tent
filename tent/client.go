@@ -6,6 +6,7 @@ package tent
 import (
 	"encoding/json"
 	"fmt"
+	// "log"
 	"time"
 )
 
@@ -60,13 +61,25 @@ func (c *Client) PostStatus(message string) (status StatusPost, err error) {
 
 func (c *Client) PostPrivateStatus(message string, recipients ...Entity) (*StatusPost, error) {
 	info := newRequestInfo(c.URI, "/tent/posts", c.Mac)
-	body, err := NewSimpleStatusPost(info, message, recipients...)
-	responseBody := []byte{}
-	responseBody, err = Post(info, body)
+	// Create new StatusPost and turn it into JSON to be POSTed
+	jsonData, err := json.Marshal(NewStatus(message, recipients...))
+	if err != nil {
+		return nil, fmt.Errorf("Error turning status into JSON: %v", err)
+	}
+	// fmt.Printf("\nAbout to be POSTed:\n%s\n\n", jsonData)
+	responseBody, err := Post(info, string(jsonData))
 	if err != nil {
 		return nil, fmt.Errorf("Error posting private status: %v", err)
 	}
-	// Unmarshal
+	// fmt.Printf("\nLiteral response: %s\n\n", responseBody)
+	// Unmarshal response into a second StatusPost
+
+	// status := StatusPost{
+	// 	Permissions: Permissions{
+	// 		Entities: make(map[Entity]bool, len(recipients)),
+	// 	},
+	// }
+
 	status := StatusPost{}
 	err = json.Unmarshal(responseBody, &status)
 	if err != nil {
