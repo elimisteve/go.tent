@@ -4,7 +4,7 @@
 package tent
 
 type Follower struct {
-	Entity      string      `json:"entity,omitempty"`
-	Id          string      `json:"id,omitempty"`
+	Entity      Entity      `json:"entity,omitempty"`
+	Id          Id          `json:"id,omitempty"`
 	Permissions Permissions `json:"permissions,omitempty"`
 }
