@@ -4,7 +4,8 @@
 package tent
 
 type Permissions struct {
-	Groups   []Group  `json:"groups,omitempty"`
-	Entities []Entity `json:"entities,omitempty"` // TODO: FIXME: See primitives.go
-	Public   bool     `json:"public,omitempty"`
+	Groups []Group `json:"groups"`
+	// Entities []Entity `json:"entities,omitempty"` // TODO: FIXME: See primitives.go
+	Entities map[Entity]bool `json:"entities"`
+	Public   bool            `json:"public"`
 }
