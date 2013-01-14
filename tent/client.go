@@ -83,9 +83,9 @@ func (c *Client) PostPrivateStatus(message string, recipients ...string) (*Statu
 	status := StatusPost{}
 	err = json.Unmarshal(responseBody, &status)
 	if err != nil {
-		return &status, nil
+		return nil, fmt.Errorf("Error unmarshaling server response: %v", err)
 	}
-	return nil, fmt.Errorf("Error unmarshaling server response: %v", err)
+	return &status, nil
 }
 
 func (c *Client) GetStatuses() ([]StatusPost, error) {
