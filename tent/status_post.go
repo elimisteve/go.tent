@@ -9,7 +9,7 @@ import (
 
 type StatusPost struct {
 	Id          Id           `json:"id,omitempty"`
-	Entity      Entity       `json:"entity,omitempty"`
+	Entity      string       `json:"entity,omitempty"`
 	PublishedAt int64        `json:"published_at,omitempty"`
 	ReceivedAt  int64        `json:"received_at,omitempty"`
 	UpdatedAt   int64        `json:"updated_at,omitempty"`
@@ -29,9 +29,9 @@ type StatusPost struct {
 //
 // TODO: Rename to `NewPrivateStatus` or `NewLimitedStatus`, whichever
 // is more precise
-func NewStatus(message string, recipients ...Entity) (status StatusPost) {
+func NewStatus(message string, recipients ...string) (status StatusPost) {
 	permissions := Permissions{
-		Entities: make(map[Entity]bool, len(recipients)),
+		Entities: make(map[string]bool, len(recipients)),
 		Public:   false,
 	}
 	mentions := []Mention{}

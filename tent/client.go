@@ -59,7 +59,7 @@ func (c *Client) PostStatus(message string) (status StatusPost, err error) {
 	return
 }
 
-func (c *Client) PostPrivateStatus(message string, recipients ...Entity) (*StatusPost, error) {
+func (c *Client) PostPrivateStatus(message string, recipients ...string) (*StatusPost, error) {
 	info := newRequestInfo(c.URI, "/tent/posts", c.Mac)
 	// Create new StatusPost and turn it into JSON to be POSTed
 	jsonData, err := json.Marshal(NewStatus(message, recipients...))

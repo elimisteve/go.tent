@@ -7,7 +7,7 @@ package tent
 
 // All fields optional
 type CoreInfo struct {
-	Entity      Entity      `json:"entity,omitempty"`
+	Entity      string      `json:"entity,omitempty"`
 	Licenses    []URL       `json:"licenses,omitempty"`
 	Servers     []URL       `json:"servers,omitempty"` // API roots
 	Permissions Permissions `json:"permissions,omitempty"`

@@ -4,6 +4,6 @@
 package tent
 
 type Repost struct {
-	Entity Entity `json:"entity"` // Required
+	Entity string `json:"entity"` // Required
 	Id     Id     `json:"id"`     // Required
 }

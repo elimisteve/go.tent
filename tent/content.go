@@ -6,7 +6,7 @@ package tent
 // Content is a superset of Status, Repost, Profile, and Delete. Visit
 // http://tent.io/docs/post-types to see wtf I'm talking about.
 type Content struct {
-	Entity   Entity `json:"entity,omitempty"`
+	Entity   string `json:"entity,omitempty"`
 	Id       Id     `json:"id,omitempty"`
 	Types    []URL  `json:"types,omitempty"`
 	Action   string `json:"action,omitempty"`

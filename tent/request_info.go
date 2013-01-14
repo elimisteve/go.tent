@@ -25,12 +25,12 @@ func newRequestInfo(host, path string, mac *Mac) *RequestInfo {
 	}
 	// If protocol included in Host string, strip it off
 	if strings.HasPrefix(req.Host, "http://") {
-		// Eveverything after the "http://"
+		// Everything after the "http://"
 		req.Host = req.Host[len("http://"):]
 		req.Proto = "http"
 	}
 	if strings.HasPrefix(req.Host, "https://") {
-		// Eveverything after the "https://"
+		// Everything after the "https://"
 		req.Host = req.Host[len("https://"):]
 		req.Proto = "https"
 	}
