@@ -32,7 +32,7 @@ func main() {
 	fun.MaybeFatalAt("client.GetStatuses", err)
 	if len(posts) != 0 {
 		post := posts[0]
-		fmt.Printf("Latest post in %s's feed. From %s: %v\n",
+		fmt.Printf("The latest post in %s's feed, from %s:\n%v",
 			TENT_SERVER, post.Entity, post.Content.Text)
 	}
 
@@ -52,13 +52,24 @@ func main() {
 		fmt.Printf("%s", f.Entity)
 	}
 	fmt.Printf("\n\n")
+
+	//
+	// Post new private status that only you and ^https://tent.tent.is can see
+	//
+	msg := "Dear ^https://tent.tent.is -- don't tell anyone this, but..."
+	statusPost, err := client.PostPrivateStatus(msg, "https://tent.tent.is",
+		"https://"+TENT_SERVER)
+	fun.MaybeFatalAt("client.PostPrivateStatus", err)
+	fmt.Printf("See a status post that only you and ^https://tent.tent.is ")
+	fmt.Printf("can see at https://%s/posts/%s\n\n", TENT_SERVER, statusPost.Id)
+
 	//
 	// Post new status update to TENT_SERVER
 	//
-	msg := "This message posted with go.tent's sample client "
+	msg = "This message posted with go.tent's sample client "
 	msg += "https://github.com/elimisteve/go.tent"
-	statusPost, err := client.PostStatus(msg)
+	publicPost, err := client.PostStatus(msg)
 	fun.MaybeFatalAt("client.PostStatus", err)
 	fmt.Printf("You just posted to Tent.is! See it at https://%s/posts/%s\n",
-		TENT_SERVER, statusPost.Id)
+		TENT_SERVER, publicPost.Id)
 }
